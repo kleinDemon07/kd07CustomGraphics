@@ -92,6 +92,7 @@ static void render_callback(Canvas* canvas, void* ctx) {
     canvas_draw_line(canvas, 6, 0, 124, 0);
     canvas_draw_line(canvas, 126, 2, 126, 47);
     canvas_draw_dot(canvas, 125, 1);
+    canvas_draw_dot(canvas, 127, 1);
     canvas_set_color(canvas, ColorBlack);
 
     // portrait
@@ -113,9 +114,9 @@ static void render_callback(Canvas* canvas, void* ctx) {
     canvas_draw_line(canvas, 8, 6, 8, 52);
     //
 
-    canvas_draw_line(canvas, 58, 16, 123, 16);
-    canvas_draw_line(canvas, 58, 30, 123, 30);
-    canvas_draw_line(canvas, 58, 44, 123, 44);
+    canvas_draw_line(canvas, 58, 15, 123, 15);
+    canvas_draw_line(canvas, 58, 29, 123, 29);
+    canvas_draw_line(canvas, 58, 43, 123, 43);
 
     const char* my_name = furi_hal_version_get_name_ptr();
     snprintf(level_str, 20, "Lvl: %hu", stats->level);
