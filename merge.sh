@@ -1,0 +1,1 @@
+cp -r applications/ assets/ ../flipperzero-firmware-wPlugins/
