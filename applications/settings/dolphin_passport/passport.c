@@ -84,13 +84,16 @@ static void render_callback(Canvas* canvas, void* ctx) {
     }
 
     // multipass
+    canvas_draw_box(canvas, 0, 0, 128, 64);
     canvas_draw_icon(canvas, 0, 0, &I_passport_left_6x46);
     canvas_draw_icon(canvas, 0, 46, &I_passport_bottom_128x18);
     canvas_draw_icon(canvas, 95, 1, &I_passport_aux_32x16);
+    canvas_set_color(canvas, ColorWhite);
     canvas_draw_line(canvas, 6, 0, 125, 0);
     canvas_draw_line(canvas, 127, 2, 127, 47);
     canvas_draw_dot(canvas, 126, 1);
-    
+    canvas_set_color(canvas, ColorBlack);
+
     // portrait
     furi_assert((stats->level > 0) && (stats->level <= 30));
     uint16_t tmpLvl = 0;
@@ -101,6 +104,15 @@ static void render_callback(Canvas* canvas, void* ctx) {
     if(stats->level > 24) tmpLvl = 5;
     if(stats->level > 27) tmpLvl = 6;
     canvas_draw_icon(canvas, 9, 5, portraits[mood][tmpLvl]);
+    canvas_set_color(canvas, ColorWhite);
+
+    // 
+    canvas_draw_line(canvas, 10, 4, 53, 4);
+    canvas_draw_line(canvas, 55, 6, 55, 52);
+    canvas_draw_line(canvas, 10, 54, 53, 54);
+    canvas_draw_line(canvas, 8, 6, 8, 52);
+    //
+
     canvas_draw_line(canvas, 58, 16, 123, 16);
     canvas_draw_line(canvas, 58, 30, 123, 30);
     canvas_draw_line(canvas, 58, 44, 123, 44);
@@ -111,15 +123,14 @@ static void render_callback(Canvas* canvas, void* ctx) {
     canvas_set_font(canvas, FontSecondary);
     canvas_draw_str(canvas, 58, 12, my_name ? my_name : "Unknown");
     canvas_draw_str(canvas, 58, 26, mood_str);
-    canvas_set_color(canvas, ColorBlack);
     canvas_draw_str(canvas, 58, 40, level_str);
     canvas_set_font(canvas, FontBatteryPercent);
-    canvas_draw_str(canvas, 80, 40, xp_str);
+    canvas_draw_str_aligned(canvas, 122, 40, AlignRight, AlignBottom, xp_str);
     canvas_set_font(canvas, FontSecondary);
 
-    canvas_set_color(canvas, ColorWhite);
-    canvas_draw_box(canvas, 123 - xp_progress, 47, xp_progress + 1, 6);
     canvas_set_color(canvas, ColorBlack);
+    canvas_draw_box(canvas, 123 - xp_progress, 47, xp_progress + 1, 6);
+    canvas_set_color(canvas, ColorWhite);
     canvas_draw_line(canvas, 123, 47, 123, 52);
 }
 
