@@ -84,14 +84,14 @@ static void render_callback(Canvas* canvas, void* ctx) {
     }
 
     // multipass
-    canvas_draw_box(canvas, 0, 0, 128, 64);
+    canvas_draw_box(canvas, 1, 1, 127, 63);
     canvas_draw_icon(canvas, 0, 0, &I_passport_left_6x46);
     canvas_draw_icon(canvas, 0, 46, &I_passport_bottom_128x18);
-    canvas_draw_icon(canvas, 95, 1, &I_passport_aux_32x16);
+    // canvas_draw_icon(canvas, 94, 1, &I_passport_aux_32x16);
     canvas_set_color(canvas, ColorWhite);
-    canvas_draw_line(canvas, 6, 0, 125, 0);
-    canvas_draw_line(canvas, 127, 2, 127, 47);
-    canvas_draw_dot(canvas, 126, 1);
+    canvas_draw_line(canvas, 6, 0, 124, 0);
+    canvas_draw_line(canvas, 126, 2, 126, 47);
+    canvas_draw_dot(canvas, 125, 1);
     canvas_set_color(canvas, ColorBlack);
 
     // portrait
