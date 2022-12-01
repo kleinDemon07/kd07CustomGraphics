@@ -86,7 +86,7 @@ static void render_callback(Canvas* canvas, void* ctx) {
     // multipass
     canvas_draw_box(canvas, 1, 1, 126, 62);
     canvas_draw_icon(canvas, 0, 0, &I_passport_left_6x46);
-    canvas_draw_icon(canvas, 109, 0, $I_passport_aux_19x28);
+    canvas_draw_icon(canvas, 109, 0, &I_passport_aux_19x28);
     canvas_draw_icon(canvas, 0, 46, &I_passport_bottom_128x18);
     canvas_set_color(canvas, ColorWhite);
     canvas_draw_line(canvas, 6, 0, 108, 0);
