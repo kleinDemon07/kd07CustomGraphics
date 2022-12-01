@@ -84,15 +84,13 @@ static void render_callback(Canvas* canvas, void* ctx) {
     }
 
     // multipass
-    canvas_draw_box(canvas, 1, 1, 127, 63);
+    canvas_draw_box(canvas, 1, 1, 126, 62);
     canvas_draw_icon(canvas, 0, 0, &I_passport_left_6x46);
+    canvas_draw_icon(canvas, 109, 0, $I_passport_aux_19x28);
     canvas_draw_icon(canvas, 0, 46, &I_passport_bottom_128x18);
-    // canvas_draw_icon(canvas, 94, 1, &I_passport_aux_32x16);
     canvas_set_color(canvas, ColorWhite);
-    canvas_draw_line(canvas, 6, 0, 124, 0);
-    canvas_draw_line(canvas, 126, 2, 126, 47);
-    canvas_draw_dot(canvas, 125, 1);
-    canvas_draw_dot(canvas, 127, 1);
+    canvas_draw_line(canvas, 6, 0, 108, 0);
+    canvas_draw_line(canvas, 127, 28, 127, 45);
     canvas_set_color(canvas, ColorBlack);
 
     // portrait
@@ -126,7 +124,7 @@ static void render_callback(Canvas* canvas, void* ctx) {
     canvas_draw_str(canvas, 58, 26, mood_str);
     canvas_draw_str(canvas, 58, 40, level_str);
     canvas_set_font(canvas, FontBatteryPercent);
-    canvas_draw_str_aligned(canvas, 122, 40, AlignRight, AlignBottom, xp_str);
+    canvas_draw_str_aligned(canvas, 124, 40, AlignRight, AlignBottom, xp_str);
     canvas_set_font(canvas, FontSecondary);
 
     canvas_set_color(canvas, ColorBlack);
