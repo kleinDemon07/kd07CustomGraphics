@@ -117,14 +117,14 @@ static void render_callback(Canvas* canvas, void* ctx) {
     canvas_draw_line(canvas, 58, 43, 123, 43);
 
     const char* my_name = furi_hal_version_get_name_ptr();
-    snprintf(level_str, 20, "Lvl: %hu", stats->level);
-    snprintf(xp_str, 20, "[%lu/%lu]", xp_above_last_levelup, xp_for_current_level);
+    snprintf(level_str, 20, "Lvl:%hu", stats->level);
+    snprintf(xp_str, 20, "%lu/%lu", xp_above_last_levelup, xp_for_current_level);
     canvas_set_font(canvas, FontSecondary);
-    canvas_draw_str(canvas, 58, 12, my_name ? my_name : "Unknown");
-    canvas_draw_str(canvas, 58, 26, mood_str);
-    canvas_draw_str(canvas, 58, 40, level_str);
+    canvas_draw_str(canvas, 58, 14, my_name ? my_name : "Unknown");
+    canvas_draw_str(canvas, 58, 28, mood_str);
     canvas_set_font(canvas, FontBatteryPercent);
-    canvas_draw_str_aligned(canvas, 124, 40, AlignRight, AlignBottom, xp_str);
+    canvas_draw_str(canvas, 58, 42, level_str);
+    canvas_draw_str_aligned(canvas, 124, 42, AlignRight, AlignBottom, xp_str);
     canvas_set_font(canvas, FontSecondary);
 
     canvas_set_color(canvas, ColorBlack);
