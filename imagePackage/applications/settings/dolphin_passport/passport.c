@@ -95,12 +95,23 @@ static void render_callback(Canvas* canvas, void* ctx) {
     // portrait
     furi_assert((stats->level > 0) && (stats->level <= 30));
     uint16_t tmpLvl = 0;
-    if(stats->level > 10) tmpLvl = 1;
-    if(stats->level > 15) tmpLvl = 2;
-    if(stats->level > 18) tmpLvl = 3;
+    if(stats->level > 3) tmpLvl = 1;
+    if(stats->level > 6) tmpLvl = 2;
+    if(stats->level > 9) tmpLvl = 3;
     if(stats->level > 21) tmpLvl = 4;
     if(stats->level > 24) tmpLvl = 5;
     if(stats->level > 27) tmpLvl = 6;
+
+    // if(stats->level > 3) tmpLvl = 1;
+    // if(stats->level > 6) tmpLvl = 2;
+    // if(stats->level > 9) tmpLvl = 3;
+    // if(stats->level > 12) tmpLvl = 4;
+    // if(stats->level > 15) tmpLvl = 5;
+    // if(stats->level > 18) tmpLvl = 6;
+    // if(stats->level > 21) tmpLvl = 7;
+    // if(stats->level > 24) tmpLvl = 8;
+    // if(stats->level > 27) tmpLvl = 9;
+
     canvas_draw_icon(canvas, 9, 5, portraits[mood][tmpLvl]);
     canvas_set_color(canvas, ColorWhite);
 
@@ -117,18 +128,20 @@ static void render_callback(Canvas* canvas, void* ctx) {
     const char* my_name = furi_hal_version_get_name_ptr();
     snprintf(level_str, 20, "Lvl:%hu", stats->level);
     snprintf(xp_str, 20, "%lu/%lu", xp_above_last_levelup, xp_for_current_level);
-    canvas_set_font(canvas, FontSecondary);
+    canvas_set_font(canvas, FontBatteryPercent);
     canvas_draw_str(canvas, 58, 14, my_name ? my_name : "Unknown");
     canvas_draw_str(canvas, 58, 28, mood_str);
     canvas_set_font(canvas, FontBatteryPercent);
-    canvas_draw_str(canvas, 58, 42, level_str);
-    canvas_draw_str_aligned(canvas, 124, 42, AlignRight, AlignBottom, xp_str);
+    canvas_draw_str(canvas, 58, 49, level_str);
+    canvas_draw_str_aligned(canvas, 124, 49, AlignRight, AlignBottom, xp_str);
     canvas_set_font(canvas, FontSecondary);
 
     canvas_set_color(canvas, ColorBlack);
     canvas_draw_box(canvas, 123 - xp_progress, 51, xp_progress + 1, 3);
     canvas_set_color(canvas, ColorWhite);
+    canvas_draw_line(canvas, 123, 51, 123, 53);
 }
+
 
 int32_t passport_app(void* p) {
     UNUSED(p);
