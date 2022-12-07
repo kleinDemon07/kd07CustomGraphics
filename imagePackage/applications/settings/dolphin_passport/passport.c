@@ -9,7 +9,7 @@
 #include "../desktop_settings/desktop_settings_app.h"
 #include "math.h"
 
-#define MOODS_TOTAL 16
+#define MOODS_TOTAL 3
 #define BUTTHURT_MAX 14
 
 static const Icon* const portrait_happy[7] = {
@@ -20,22 +20,22 @@ static const Icon* const portrait_happy[7] = {
     &I_g0ku_1,
     &I_g0ku_2,
     &I_g0ku_3};
-// static const Icon* const portrait_ok[MOODS_TOTAL] = {
-// &I_passport_okay1_46x49,
-// &I_passport_okay2_46x49,
-// &I_passport_okay3_46x49};
-// static const Icon* const portrait_bad[MOODS_TOTAL] = {
-// &I_passport_bad1_46x49,
-// &I_passport_bad2_46x49,
-// &I_passport_bad3_46x49};
+static const Icon* const portrait_ok[MOODS_TOTAL] = {
+&I_passport_okay1_46x49,
+&I_passport_okay2_46x49,
+&I_passport_okay3_46x49};
+static const Icon* const portrait_bad[MOODS_TOTAL] = {
+&I_passport_bad1_46x49,
+&I_passport_bad2_46x49,
+&I_passport_bad3_46x49};
 
-// static const Icon* const* portraits[MOODS_TOTAL] = {portrait_happy, portrait_ok, portrait_bad};
-static const Icon* const* portraits[MOODS_TOTAL] = {portrait_happy};
+static const Icon* const* portraits[MOODS_TOTAL] = {portrait_happy, portrait_ok, portrait_bad};
+// static const Icon* const* portraits[MOODS_TOTAL] = {portrait_happy};
 
 static const char* const moods[16] = {
-    "Stoned",
-    "Baked",
-    "Ripped",
+    "Amplified",
+    "Electric",
+    "Sharp",
     "Joyful",
     "Happy",
     "Satisfied",
@@ -69,7 +69,15 @@ static void render_callback(Canvas* canvas, void* ctx) {
     uint8_t mood = 0;
     uint8_t moodStrIndex = stats->butthurt;
     if(desktop_settings->is_dumbmode) moodStrIndex = moodStrIndex + 4;
-    snprintf(mood_str, 20, "Mood: %s", moods[moodStrIndex]);
+
+    mood = 0;
+    if(moodStrIndex >= 5) {
+        mood = 1;
+    } else if (moodStrIndex >= 10) {
+        mood = 2;
+    }
+
+    snprintf(mood_str, 20, "%s", moods[moodStrIndex]);
 
     uint32_t xp_progress = 0;
     uint32_t xp_to_levelup = dolphin_state_xp_to_levelup(stats->icounter);
@@ -85,22 +93,22 @@ static void render_callback(Canvas* canvas, void* ctx) {
     // multipass
     canvas_draw_box(canvas, 1, 1, 126, 62);
     canvas_draw_icon(canvas, 0, 0, &I_passport_left_6x46);
-    canvas_draw_icon(canvas, 109, 0, &I_passport_aux_19x28);
+    canvas_draw_icon(canvas, 109, 0, &I_passport_aux_19x26);
     canvas_draw_icon(canvas, 0, 46, &I_passport_bottom_128x18);
     canvas_set_color(canvas, ColorWhite);
     canvas_draw_line(canvas, 6, 0, 108, 0);
-    canvas_draw_line(canvas, 127, 28, 127, 45);
+    canvas_draw_line(canvas, 127, 26, 127, 45);
     canvas_set_color(canvas, ColorBlack);
 
     // portrait
     furi_assert((stats->level > 0) && (stats->level <= 30));
     uint16_t tmpLvl = 0;
-    if(stats->level > 3) tmpLvl = 1;
-    if(stats->level > 6) tmpLvl = 2;
-    if(stats->level > 9) tmpLvl = 3;
-    if(stats->level > 21) tmpLvl = 4;
-    if(stats->level > 24) tmpLvl = 5;
-    if(stats->level > 27) tmpLvl = 6;
+    if(stats->level >= 3) tmpLvl = 1;
+    if(stats->level >= 6) tmpLvl = 2;
+    if(stats->level >= 9) tmpLvl = 3;
+    if(stats->level >= 21) tmpLvl = 4;
+    if(stats->level >= 24) tmpLvl = 5;
+    if(stats->level >= 27) tmpLvl = 6;
 
     // if(stats->level > 3) tmpLvl = 1;
     // if(stats->level > 6) tmpLvl = 2;
@@ -120,17 +128,23 @@ static void render_callback(Canvas* canvas, void* ctx) {
     canvas_draw_line(canvas, 55, 6, 55, 52);
     canvas_draw_line(canvas, 10, 54, 53, 54);
     canvas_draw_line(canvas, 8, 6, 8, 52);
-    //
 
-    canvas_draw_line(canvas, 58, 15, 123, 15);
-    canvas_draw_line(canvas, 58, 29, 123, 29);
+    //  Name/Mood Divider
+    canvas_draw_line(canvas, 58, 6, 58, 37);
+    canvas_draw_line(canvas, 59, 5, 59, 19);
+    canvas_draw_line(canvas, 59, 24, 59, 38);
+    canvas_draw_dot(canvas, 60, 4);
+    canvas_draw_dot(canvas, 60, 39);
+    canvas_draw_box(canvas, 60, 21, 50, 2);
 
     const char* my_name = furi_hal_version_get_name_ptr();
     snprintf(level_str, 20, "Lvl:%hu", stats->level);
     snprintf(xp_str, 20, "%lu/%lu", xp_above_last_levelup, xp_for_current_level);
     canvas_set_font(canvas, FontBatteryPercent);
-    canvas_draw_str(canvas, 58, 14, my_name ? my_name : "Unknown");
-    canvas_draw_str(canvas, 58, 28, mood_str);
+    canvas_draw_str(canvas, 61, 12, "Name:"); 
+    canvas_draw_str(canvas, 61, 20, my_name ? my_name : "Unknown");
+    canvas_draw_str(canvas, 61, 30, "Mood:");
+    canvas_draw_str(canvas, 61, 38, mood_str);
     canvas_set_font(canvas, FontBatteryPercent);
     canvas_draw_str(canvas, 58, 49, level_str);
     canvas_draw_str_aligned(canvas, 124, 49, AlignRight, AlignBottom, xp_str);
