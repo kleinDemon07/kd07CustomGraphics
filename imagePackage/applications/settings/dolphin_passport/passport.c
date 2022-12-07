@@ -9,7 +9,7 @@
 #include "../desktop_settings/desktop_settings_app.h"
 #include "math.h"
 
-#define MOODS_TOTAL 1
+#define MOODS_TOTAL 16
 #define BUTTHURT_MAX 14
 
 static const Icon* const portrait_happy[7] = {
@@ -70,7 +70,6 @@ static void render_callback(Canvas* canvas, void* ctx) {
     uint8_t moodStrIndex = stats->butthurt;
     if(desktop_settings->is_dumbmode) moodStrIndex = moodStrIndex + 4;
     snprintf(mood_str, 20, "Mood: %s", moods[moodStrIndex]);
-    mood = 0; // DONT NEED DIFFERENT PICS BASED ON MOOD
 
     uint32_t xp_progress = 0;
     uint32_t xp_to_levelup = dolphin_state_xp_to_levelup(stats->icounter);
@@ -105,7 +104,7 @@ static void render_callback(Canvas* canvas, void* ctx) {
     canvas_draw_icon(canvas, 9, 5, portraits[mood][tmpLvl]);
     canvas_set_color(canvas, ColorWhite);
 
-    // 
+    // Portrait Frame *needs to be turned into a actual canvas_draw_frame
     canvas_draw_line(canvas, 10, 4, 53, 4);
     canvas_draw_line(canvas, 55, 6, 55, 52);
     canvas_draw_line(canvas, 10, 54, 53, 54);
@@ -114,7 +113,6 @@ static void render_callback(Canvas* canvas, void* ctx) {
 
     canvas_draw_line(canvas, 58, 15, 123, 15);
     canvas_draw_line(canvas, 58, 29, 123, 29);
-    canvas_draw_line(canvas, 58, 43, 123, 43);
 
     const char* my_name = furi_hal_version_get_name_ptr();
     snprintf(level_str, 20, "Lvl:%hu", stats->level);
@@ -128,9 +126,8 @@ static void render_callback(Canvas* canvas, void* ctx) {
     canvas_set_font(canvas, FontSecondary);
 
     canvas_set_color(canvas, ColorBlack);
-    canvas_draw_box(canvas, 123 - xp_progress, 47, xp_progress + 1, 6);
+    canvas_draw_box(canvas, 123 - xp_progress, 51, xp_progress + 1, 3);
     canvas_set_color(canvas, ColorWhite);
-    canvas_draw_line(canvas, 123, 47, 123, 52);
 }
 
 int32_t passport_app(void* p) {

@@ -1,3 +1,4 @@
 *.psd
 f7-update-KD07FAP/
-firmwareSocket/*
+firmwareSocket/**/
+.vscode/
