@@ -1,3 +1,4 @@
+rm -f KD*-*-*.tgz KD*-*-*.zip
 cd firmwareSocket/flipperzero-firmware-wPlugins/
 rm -rf dist/ build/ KD*-*-*.tgz KD*-*-*.zip RM*-*-*.tgz RM*-*-*.zip applications/main/clock/icons/
 cd assets/
