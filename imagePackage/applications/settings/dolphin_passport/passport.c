@@ -12,14 +12,17 @@
 #define MOODS_TOTAL 3
 #define BUTTHURT_MAX 14
 
-static const Icon* const portrait_happy[7] = {
+static const Icon* const portrait_happy[9] = {
     &I_passport_happy1_46x49,
     &I_passport_happy2_46x49,
     &I_passport_happy3_46x49,
-    &I_G0ku,
-    &I_g0ku_1,
-    &I_g0ku_2,
-    &I_g0ku_3};
+    &I_passport_happy4_46x49,
+    &I_passport_happy5_46x49,
+    &I_passport_happy6_46x49,
+    &I_passport_happy7_46x49,
+    &I_passport_happy8_46x49,
+    &I_passport_happy9_46x49};
+
 static const Icon* const portrait_ok[MOODS_TOTAL] = {
 &I_passport_okay1_46x49,
 &I_passport_okay2_46x49,
@@ -103,22 +106,15 @@ static void render_callback(Canvas* canvas, void* ctx) {
     // portrait
     furi_assert((stats->level > 0) && (stats->level <= 30));
     uint16_t tmpLvl = 0;
-    if(stats->level >= 3) tmpLvl = 1;
-    if(stats->level >= 6) tmpLvl = 2;
-    if(stats->level >= 9) tmpLvl = 3;
-    if(stats->level >= 21) tmpLvl = 4;
-    if(stats->level >= 24) tmpLvl = 5;
-    if(stats->level >= 27) tmpLvl = 6;
-
-    // if(stats->level > 3) tmpLvl = 1;
-    // if(stats->level > 6) tmpLvl = 2;
-    // if(stats->level > 9) tmpLvl = 3;
-    // if(stats->level > 12) tmpLvl = 4;
-    // if(stats->level > 15) tmpLvl = 5;
-    // if(stats->level > 18) tmpLvl = 6;
-    // if(stats->level > 21) tmpLvl = 7;
-    // if(stats->level > 24) tmpLvl = 8;
-    // if(stats->level > 27) tmpLvl = 9;
+    if(stats->level > 1) tmpLvl = 1;
+    if(stats->level > 2) tmpLvl = 2;
+    if(stats->level > 3) tmpLvl = 3;
+    if(stats->level > 4) tmpLvl = 4;
+    if(stats->level > 5) tmpLvl = 5;
+    if(stats->level > 6) tmpLvl = 6;
+    if(stats->level > 7) tmpLvl = 7;
+    if(stats->level > 8) tmpLvl = 8;
+    // if(stats->level > 9) tmpLvl = 9;
 
     canvas_draw_icon(canvas, 9, 5, portraits[mood][tmpLvl]);
     canvas_set_color(canvas, ColorWhite);

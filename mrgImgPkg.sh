@@ -1,5 +1,5 @@
 cd firmwareSocket/flipperzero-firmware-wPlugins/
-rm -rf dist/ build/ KD*-*-*.tgz KD*-*-*.zip RM*-*-*.tgz RM*-*-*.zip
+rm -rf dist/ build/ KD*-*-*.tgz KD*-*-*.zip RM*-*-*.tgz RM*-*-*.zip applications/main/clock/icons/
 cd assets/
 rm -rf dolphin/* icons/* slideshow/* resources/dolphin/*/
 rm -f resources/dolphin/manifest.txt
