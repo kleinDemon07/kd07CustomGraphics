@@ -1,4 +1,7 @@
 rm -f KD*-*-*.tgz KD*-*-*.zip
+git add .
+git commit -m'clearing last release'
+git push
 cd firmwareSocket/flipperzero-firmware-wPlugins/
 rm -rf dist/ build/ KD*-*-*.tgz KD*-*-*.zip RM*-*-*.tgz RM*-*-*.zip applications/main/clock/icons/
 cd assets/
