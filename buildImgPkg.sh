@@ -15,3 +15,6 @@ cd ../firmwareSocket/flipperzero-firmware-wPlugins/
 ./fbt resources icons dolphin_ext
 ./buildRelease.sh
 cp KD*-*-*.zip KD*-*-*.tgz ../../
+git add .
+git commit -m'pre-release'
+git push
